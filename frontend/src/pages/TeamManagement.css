@@ -407,4 +407,16 @@
 /* Remove bottom border from last row */
 .team-members-list tr:last-child td {
   border-bottom: none;
+}
+
+/* Logo styling */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  height: 40px; /* Adjust this based on your logo size */
+  width: auto;
+  max-width: 100%;
 } 

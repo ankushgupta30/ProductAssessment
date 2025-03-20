@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useClerk } from '@clerk/clerk-react';
 import './TeamManagement.css';
+import logo from '../assets/logo/Logo Option 01.svg';
 
 function TeamManagementPage() {
   const { session } = useClerk();
@@ -123,7 +124,13 @@ function TeamManagementPage() {
   return (
     <div className="team-management">
       <div className="team-header">
-        <h1>Team Management</h1>
+        <div className="logo-container">
+          <img 
+            src={logo} 
+            alt="Product Assessment Tool Logo" 
+            className="header-logo"
+          />
+        </div>
         <button 
           className="add-member-button" 
           onClick={() => setShowAddForm(true)}
