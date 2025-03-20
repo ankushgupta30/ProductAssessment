@@ -409,14 +409,30 @@
   border-bottom: none;
 }
 
-/* Logo styling */
+/* Logo styling for better visibility */
 .logo-container {
   display: flex;
   align-items: center;
 }
 
 .header-logo {
-  height: 40px; /* Adjust this based on your logo size */
+  height: 40px;
   width: auto;
-  max-width: 100%;
+  max-width: 250px;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+/* Table title styling */
+.table-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0 0 20px 0;
+  padding: 0;
+  text-align: left;
 } 

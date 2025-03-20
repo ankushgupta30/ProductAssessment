@@ -12,6 +12,7 @@ body {
 
 .App {
   text-align: center;
+  padding-top: 0;
 }
 
 .App-logo {
@@ -28,10 +29,13 @@ body {
 .App-header {
   background-color: #740037;
   color: white;
-  padding: 20px;
+  padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 0 0 12px 12px;
+  margin: 0 15px 20px;
+  box-shadow: 0 2px 8px rgba(116, 0, 55, 0.2);
 }
 
 .App-header h1 {
@@ -108,4 +112,39 @@ body {
   border-bottom: 2px solid #740037;
   padding-bottom: 10px;
   width: 100%;
+}
+
+/* Logo styling in main header */
+.header-logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.app-header-logo {
+  height: 20px; /* Reduced from 27px (approximately 75% of current size) */
+  width: auto;
+}
+
+.text-logo {
+  background-color: white;
+  color: #740037;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Logos group styling */
+.logos-group {
+  display: flex;
+  align-items: center;
+}
+
+/* Adjust header container spacing */
+.header-logo-container {
+  display: flex;
+  align-items: center;
 }
