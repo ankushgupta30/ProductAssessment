@@ -1,0 +1,112 @@
+**Task List:**
+
+**Phase 1: Back-End Development (Node.js/Express.js, PostgreSQL)**
+
+*   **Database Setup (PostgreSQL):**
+    *   [ ] Install PostgreSQL if not already installed.
+    *   [ ] Create a database for the project (e.g., `product_assessment_db`).
+    *   [ ] Design the `directors` table schema: `id`, `email`, `password`.
+    *   [ ] Choose and install a password hashing library (e.g., `bcrypt`).
+
+*   **Backend Setup (Node.js/Express.js):**
+    *   [ ] Initialize `package.json` in the `backend` directory (`npm init -y`).
+    *   [ ] Install necessary backend dependencies: `express`, `jsonwebtoken`, `pg`, `bcrypt`, `cors`.
+    *   [ ] Create `server.js` as the main server file.
+    *   [ ] Set up basic Express server with CORS and JSON middleware.
+
+*   **API Endpoints - Director Login (`/api/directors/login` - POST):**
+    *   [ ] Create a route handler for `/api/directors/login` in `routes/directors.js` (or similar).
+    *   [ ] Implement database query to find a director by email.
+    *   [ ] Implement password comparison using bcrypt.
+    *   [ ] On successful login:
+        *   [ ] Generate a JWT using `jsonwebtoken`.
+        *   [ ] Send the JWT as a response.
+    *   [ ] On unsuccessful login:
+        *   [ ] Send an appropriate error response (e.g., 401 Unauthorized).
+
+*   **JWT Authentication Middleware:**
+    *   [ ] Install `jsonwebtoken` if not already installed.
+    *   [ ] Create a middleware function to verify JWTs.
+    *   [ ] Configure JWT secret key and expiration.
+    *   [ ] Middleware should:
+        *   [ ] Extract JWT from request headers (e.g., Authorization header).
+        *   [ ] Verify JWT using `jsonwebtoken.verify()`.
+        *   [ ] If JWT is valid, attach user information to the request object (e.g., `req.director`).
+        *   [ ] If JWT is invalid, send an error response (e.g., 401 Unauthorized).
+
+*   **API Endpoints - Team Members (`/api/directors/team-members` - GET, POST, DELETE):**
+    *   [ ] Create a route handler for `/api/directors/team-members` in `routes/team-members.js` (or similar).
+    *   [ ] Implement JWT authentication middleware for all team member endpoints.
+    *   [ ] **GET `/api/directors/team-members`:**
+        *   [ ] Query the database to fetch all team members.
+        *   [ ] Send the list of team members as a JSON response.
+    *   [ ] **POST `/api/directors/team-members`:**
+        *   [ ] Extract team member data from the request body.
+        *   [ ] Validate team member data.
+        *   [ ] Insert the new team member into the database.
+        *   [ ] Send a success response (e.g., 201 Created).
+    *   [ ] **DELETE `/api/directors/team-members/:id`:**
+        *   [ ] Extract team member ID from request parameters.
+        *   [ ] Delete the team member from the database.
+        *   [ ] Send a success response (e.g., 204 No Content).
+
+**Phase 2: Front-End Development (React.js)**
+
+*   **Frontend Setup (React.js):**
+    *   [ ] Ensure React app is created in the `frontend` directory (or subdirectory).
+    *   [ ] Install necessary frontend dependencies: `react-router-dom`, any UI component libraries (if needed).
+
+*   **Login Page (`/login`):**
+    *   [ ] Create a `LoginPage` component in `frontend/src/pages`.
+    *   [ ] Add email and password input fields.
+    *   [ ] Implement a login button.
+    *   [ ] On button click:
+        *   [ ] Send a POST request to `/api/directors/login` with email and password.
+        *   [ ] On successful response (with JWT):
+            *   [ ] Store JWT in local storage or cookies.
+            *   [ ] Redirect to `/team-management` using `react-router-dom`.
+        *   [ ] On error response:
+            *   [ ] Display error message to the user.
+
+*   **Team Management Page (`/team-management`):**
+    *   [ ] Create a `TeamManagementPage` component in `frontend/src/pages`.
+    *   [ ] Implement logic to retrieve JWT from local storage/cookies.
+    *   [ ] **Fetch Team Members:**
+        *   [ ] Create a function to fetch team members from `/api/directors/team-members` (GET).
+        *   [ ] Include JWT in the `Authorization` header of the request.
+        *   [ ] Display team members in a table.
+    *   [ ] **Add Team Member Form:**
+        *   [ ] Create a form to add new team members.
+        *   [ ] On form submission:
+            *   [ ] Send a POST request to `/api/directors/team-members` with team member data.
+            *   [ ] Include JWT in the `Authorization` header.
+            *   [ ] On success, refresh the team member list.
+            *   [ ] On error, display error message.
+    *   [ ] **Delete Team Member Button:**
+        *   [ ] Add a delete button for each team member in the table.
+        *   [ ] On button click:
+            *   [ ] Send a DELETE request to `/api/directors/team-members/:id`.
+            *   [ ] Include JWT in the `Authorization` header.
+            *   [ ] On success, refresh the team member list.
+            *   [ ] On error, display error message.
+    *   [ ] **Logout Button:**
+        *   [ ] Add a logout button.
+        *   [ ] On button click:
+            *   [ ] Remove JWT from local storage/cookies.
+            *   [ ] Redirect to `/login`.
+
+*   **Routing (React Router DOM):**
+    *   [ ] Install `react-router-dom` if not already installed.
+    *   [ ] Set up routes in `App.js` or a routing component:
+        *   [ ] Route for `/login` to `LoginPage`.
+        *   [ ] Route for `/team-management` to `TeamManagementPage`.
+    *   [ ] Implement protected routing for `/team-management`:
+        *   [ ] Create a protected route component or logic.
+        *   [ ] Check if JWT exists and is valid.
+        *   [ ] If authenticated, render `TeamManagementPage`.
+        *   [ ] If not authenticated, redirect to `/login`.
+
+*   **Error Handling (Frontend):**
+    *   [ ] Implement error handling for API requests in frontend components.
+    *   [ ] Display user-friendly error messages for API failures.
+    *   [ ] Handle cases of expired or invalid JWTs (redirect to login).

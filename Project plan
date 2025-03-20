@@ -1,0 +1,118 @@
+Project Plan: Product Skill Assessment Tool
+
+I. Project Goals:
+
+Develop a web-based tool for assessing and tracking product team members' skills.
+Enable directors to manage team members and generate skill assessment surveys.
+Provide a dashboard for visualizing team skill profiles.
+Create a user-friendly survey page for team members to complete self-assessments.
+II. Target Users:
+
+Product team members
+Product team directors
+III. Core Features:
+
+User Authentication:
+Secure login for directors.
+Profile management for directors.
+Team Management:
+Ability to add and remove team members.
+Skill Assessment Survey:
+Generation of unique survey links for each team member.
+Likert scale questions for skill subsets within five core assessment areas.
+User-friendly survey page for self-assessment.
+Skill Matrix Dashboard:
+Table view of team members and survey completion status.
+Spider net graph visualization of team skill profiles.
+IV. Technology Stack:
+
+Front-End: React.js, React Router DOM, HTML/CSS/JavaScript.
+Back-End: Node.js, Express.js, JSON Web Tokens (JWT).
+Database: PostgreSQL.
+Deployment: Heroku.
+V. Project Phases:
+
+Phase 1: Back-End Setup and Authentication (2 Weeks)
+
+Tasks:
+Set up Node.js and Express.js project.
+Design and implement PostgreSQL database schema.
+Create API endpoints for director login and profile management.
+Implement JWT authentication.
+Test API endpoints using Postman or Insomnia.
+Deliverables:
+Functional back-end API for login and profile management.
+Phase 2: Team Management and Survey Generation (2 Weeks)
+
+Tasks:
+Create API endpoints for team member management (add, remove, view).
+Implement logic to generate unique survey links.
+Store survey data and responses in the database.
+Test API endpoints for team management and survey generation.
+Deliverables:
+Functional back-end API for team management and survey link generation.
+Phase 3: Front-End Login and Team Management (2 Weeks)
+
+Tasks:
+Create React components for login and profile pages.
+Implement API calls for login and profile management.
+Create React component for team management page.
+Implement API calls for team member management.
+Set up routing with React Router DOM.
+Implement protected routes.
+Deliverables:
+Functional front-end for login, profile, and team management.
+Phase 4: Survey Page Implementation (2 Weeks)
+
+Tasks:
+Create React component for the survey page.
+Implement dynamic rendering of survey questions from the questionnaire data.
+Implement Likert scale question components.
+Implement state management for user responses.
+Implement a submit button (placeholder for MVP).
+Deliverables:
+Functional survey page for team member self-assessment.
+Phase 5: Skill Matrix Dashboard (2 Weeks)
+
+Tasks:
+Create React component for the skill matrix dashboard.
+Implement API calls to fetch survey results.
+Implement table view of team members and completion status.
+Implement spider net graph visualization of team skills.
+Test dashboard functionality.
+Deliverables:
+Functional skill matrix dashboard.
+Phase 6: Testing, Deployment, and Documentation (2 Weeks)
+
+Tasks:
+Conduct thorough testing of all features.
+Deploy back-end to Heroku.
+Deploy front-end to a hosting platform.
+Write documentation for the application.
+Deliverables:
+Deployed and functional application.
+Application documentation.
+VI. Project Timeline (12 Weeks Total):
+
+Week 1-2: Back-End Setup and Authentication
+Week 3-4: Team Management and Survey Generation
+Week 5-6: Front-End Login and Team Management
+Week 7-8: Survey Page Implementation
+Week 9-10: Skill Matrix Dashboard
+Week 11-12: Testing, Deployment, and Documentation
+VII. Risk Management:
+
+Risk: API endpoint errors.
+Mitigation: Implement robust error handling and logging.
+Risk: Database connection issues.
+Mitigation: Configure database connection settings carefully and test thoroughly.
+Risk: Front-end routing issues.
+Mitigation: Test routing thoroughly with different scenarios.
+Risk: Time constraints.
+Mitigation: Prioritize core features and maintain clear communication.
+VIII. Communication Plan:
+
+Regular team meetings for progress updates.
+Use a project management tool (e.g., Trello, Jira) for task tracking.
+Maintain clear communication channels (e.g., Slack, email).
+This plan provides a structured approach to building the Product Skill Assessment Tool. It can be adjusted based on project progress and feedback.
