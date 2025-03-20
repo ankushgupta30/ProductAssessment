@@ -1,6 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+body {
+  background-color: #FEEAEC;
+  color: #333333;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
-  font-family: Arial, sans-serif;
 }
 
 .App-logo {
@@ -15,7 +26,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #740037;
   color: white;
   padding: 20px;
   display: flex;
@@ -25,7 +36,8 @@
 
 .App-header h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 22px;
+  font-weight: 500;
 }
 
 .App-header nav {
@@ -40,6 +52,7 @@
   padding: 8px 16px;
   border-radius: 4px;
   transition: background-color 0.3s;
+  font-weight: 400;
 }
 
 .nav-link:hover {
@@ -58,19 +71,22 @@
 }
 
 .home-page h2 {
-  color: #282c34;
+  color: #333333;
   margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 24px;
 }
 
 .home-page p {
-  font-size: 1.1rem;
-  color: #666;
+  font-size: 16px;
+  color: #333333;
   max-width: 600px;
   margin: 0 auto;
+  line-height: 1.5;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #740037;
 }
 
 @keyframes App-logo-spin {
@@ -80,4 +96,16 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Add this to enhance the page titles */
+.page-title {
+  color: #333333;
+  font-weight: 500;
+  font-size: 28px;
+  margin-bottom: 25px;
+  text-align: left;
+  border-bottom: 2px solid #740037;
+  padding-bottom: 10px;
+  width: 100%;
 }

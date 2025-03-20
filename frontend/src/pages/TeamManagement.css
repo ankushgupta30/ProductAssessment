@@ -1,93 +1,410 @@
 .team-management {
-  max-width: 800px;
+  max-width: 1728px;
   margin: 0 auto;
   padding: 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #333333;
+}
+
+.team-management h1 {
+  font-weight: 500;
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.team-management h2 {
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333333;
 }
 
 .add-member-form {
-  background-color: #f5f5f5;
-  padding: 20px;
+  background-color: white;
+  padding: 25px;
   border-radius: 8px;
   margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(116, 0, 55, 0.1);
 }
 
 .add-member-form form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 18px;
 }
 
 .add-member-form form div {
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .add-member-form label {
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #333333;
 }
 
 .add-member-form input,
 .add-member-form select {
-  padding: 8px;
-  border: 1px solid #ddd;
+  padding: 12px;
+  border: 1px solid #E0E0E0;
   border-radius: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  color: #333333;
+  background-color: rgba(254, 234, 236, 0.5);
+}
+
+.add-member-form input:focus,
+.add-member-form select:focus {
+  outline: none;
+  border-color: #740037;
+  box-shadow: 0 0 0 2px rgba(116, 0, 55, 0.2);
 }
 
 .add-member-form button {
-  padding: 10px;
-  background-color: #4285f4;
+  padding: 12px 20px;
+  background-color: #740037;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.2s;
 }
 
 .add-member-form button:hover {
-  background-color: #3367d6;
+  background-color: #5C002C;
+}
+
+.add-member-form button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(116, 0, 55, 0.4);
 }
 
 .add-member-form button:disabled {
-  background-color: #a9a9a9;
+  background-color: #B0B0B0;
   cursor: not-allowed;
+}
+
+.add-member-form .secondary-button {
+  background-color: #e0e0e0 !important;
+  color: #333333 !important;
+}
+
+.add-member-form .secondary-button:hover {
+  background-color: #d0d0d0 !important;
+}
+
+.team-members-list {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(116, 0, 55, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .team-members-list table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 15px;
+  table-layout: fixed;
 }
 
 .team-members-list th,
 .team-members-list td {
-  padding: 12px;
+  padding: 16px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #EEEEEE;
 }
 
 .team-members-list th {
-  background-color: #f5f5f5;
-  font-weight: bold;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 16px;
+  color: #333333;
+  border-bottom: 2px solid #EEEEEE;
+}
+
+.team-members-list th:first-child,
+.team-members-list td:first-child {
+  width: 26%;
+}
+
+.team-members-list th:nth-child(2),
+.team-members-list td:nth-child(2) {
+  width: 36%;
+}
+
+.team-members-list th:nth-child(3),
+.team-members-list td:nth-child(3) {
+  width: 30%;
+}
+
+.team-members-list th:last-child,
+.team-members-list td:last-child {
+  width: 8%;
+  text-align: center;
+  position: relative;
+}
+
+/* Make names bold in the first column */
+.team-members-list td:first-child {
+  font-weight: 600; /* Changed from 400 to 600 for semibold */
+}
+
+/* Keep other table cells regular weight */
+.team-members-list td {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.team-members-list tr:hover {
+  background-color: rgba(116, 0, 55, 0.05);
 }
 
 .team-members-list button {
-  padding: 5px 10px;
-  background-color: #ff4d4f;
+  padding: 8px 14px;
+  background-color: #FF5252;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background-color 0.2s;
 }
 
 .team-members-list button:hover {
-  background-color: #d9363e;
+  background-color: #E04545;
 }
 
 .error {
-  color: #ff4d4f;
-  background-color: #fff1f0;
-  padding: 10px;
-  border: 1px solid #ffccc7;
+  color: #D32F2F;
+  background-color: #FFEBEE;
+  padding: 12px 16px;
+  border: 1px solid #FFCDD2;
   border-radius: 4px;
-  margin: 10px 0;
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.error button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #D32F2F;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.error button:hover {
+  background-color: #C62828;
+}
+
+.team-members-list p {
+  color: #757575;
+  font-style: italic;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.status-bar {
+  margin: 15px 0 0 0;
+  font-size: 14px;
+  color: #740037;
+  text-align: right;
+  font-weight: 500;
+  padding: 10px 0 0 0;
+  border-top: 1px solid #eee;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.status-bar p {
+  padding: 0;
+  font-style: normal;
+  color: #740037;
+  text-align: right;
+}
+
+/* New team header with flex layout */
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.team-header h1 {
+  font-weight: 500;
+  font-size: 26px;
+  margin: 0;
+  color: #333333;
+}
+
+/* Style for the Add Team Member button */
+.add-member-button {
+  background-color: #740037;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-member-button:hover {
+  background-color: #5C002C;
+}
+
+/* Popup styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: white;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 25px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.popup-header h2 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 20px;
+  color: #333333;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+/* Adjust the form inside popup */
+.popup-content .add-member-form {
+  margin-bottom: 0;
+  box-shadow: none;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Style for filled inputs */
+.add-member-form input.filled,
+.add-member-form select.filled {
+  font-weight: 600;
+}
+
+/* Placeholder styling */
+.add-member-form input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Delete icon styling - container fix */
+.delete-icon {
+  background: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  outline: none;
+}
+
+.delete-icon:hover {
+  transform: scale(1.1);
+  background: transparent;
+}
+
+.delete-icon:hover::after {
+  content: "Remove";
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* Make sure the SVG icon is clearly visible */
+.delete-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: #FF5252;
+  stroke-width: 2;
+  fill: none;
+  display: block;
+}
+
+/* Override any table button styles that might be affecting the delete icon */
+.team-members-list .delete-icon {
+  background: transparent;
+  padding: 5px;
+  border-radius: 0;
+}
+
+.team-members-list .delete-icon:hover {
+  background: transparent;
+}
+
+/* Remove bottom border from last row */
+.team-members-list tr:last-child td {
+  border-bottom: none;
 } 

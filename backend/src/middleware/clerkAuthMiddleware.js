@@ -4,25 +4,23 @@ const clerk = Clerk({ secretKey: process.env.CLERK_SECRET_KEY });
 
 const authenticateClerk = async (req, res, next) => {
   try {
-    // Get the session token from the Authorization header
-    const sessionToken = req.headers.authorization?.split(' ')[1];
+    // Get the token from the Authorization header
+    const token = req.headers.authorization?.split(' ')[1];
     
-    if (!sessionToken) {
+    if (!token) {
       return res.status(401).json({ error: 'No authentication token provided' });
     }
     
-    // Verify the session token
-    const session = await clerk.verifyToken(sessionToken);
+    // Verify the token
+    const { sub } = await clerk.verifyToken(token);
     
-    if (!session) {
+    if (!sub) {
       return res.status(401).json({ error: 'Invalid authentication token' });
     }
     
-    // Attach the session to the request object
-    req.session = session;
-    req.userId = session.sub;
+    // Add the user ID to the request object
+    req.userId = sub;
     
-    // Continue to the next middleware or route handler
     next();
   } catch (error) {
     console.error('Authentication error:', error);

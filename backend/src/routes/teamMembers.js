@@ -34,7 +34,7 @@ router.post('/', authenticateClerk, async (req, res) => {
   try {
     const result = await pool.query(
       'INSERT INTO team_members (name, email, role, director_id) VALUES ($1, $2, $3, $4) RETURNING *',
-      [name, email, role || 'Member', req.userId]
+      [name, email, role || 'Product Manager', req.userId]
     );
     
     res.status(201).json(result.rows[0]);
