@@ -15,6 +15,7 @@ const pool = new Pool({
 const app = express();
 const port = process.env.PORT || 5001; // Changed from 5000 to 5001
 const teamMembersRoutes = require('./src/routes/teamMembers');
+const surveyRoutes = require('./src/routes/surveys');
 
 // Configure CORS with specific options
 app.use(cors({
@@ -45,6 +46,7 @@ app.get('/api/protected', clerkAuthMiddleware, (req, res) => {
 
 // Routes
 app.use('/api/directors/team-members', teamMembersRoutes);
+app.use('/api/surveys', surveyRoutes);
 
 // Updated list of valid roles
 const validRoles = [

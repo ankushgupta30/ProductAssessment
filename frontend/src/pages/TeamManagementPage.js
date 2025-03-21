@@ -8,6 +8,13 @@ function TeamManagementPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showSurveyLinkPopup, setShowSurveyLinkPopup] = useState(false);
+  const [selectedMember, setSelectedMember] = useState(null);
+  const [surveyLink, setSurveyLink] = useState('');
+  const [surveyLinkError, setSurveyLinkError] = useState(null);
+  const [surveyLinkLoading, setSurveyLinkLoading] = useState(false);
+  const [surveyTemplates, setSurveyTemplates] = useState([]);
+  const [selectedTemplateId, setSelectedTemplateId] = useState('');
   
   // Form state
   const [name, setName] = useState('');
@@ -115,6 +122,102 @@ function TeamManagementPage() {
     }
   };
 
+  // Fetch survey templates
+  useEffect(() => {
+    const fetchSurveyTemplates = async () => {
+      try {
+        const token = await session.getToken();
+        
+        const response = await fetch('http://localhost:5001/api/surveys/templates', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch survey templates');
+        }
+        
+        const data = await response.json();
+        setSurveyTemplates(data);
+        
+        // Set first template as default selected
+        if (data.length > 0) {
+          setSelectedTemplateId(data[0].id);
+        }
+      } catch (err) {
+        console.error('Error fetching survey templates:', err);
+      }
+    };
+    
+    fetchSurveyTemplates();
+  }, [session]);
+  
+  // Generate survey link
+  const handleGenerateSurveyLink = async () => {
+    if (!selectedTemplateId) {
+      setSurveyLinkError('Please select a survey template');
+      return;
+    }
+    
+    try {
+      setSurveyLinkLoading(true);
+      setSurveyLinkError(null);
+      
+      const token = await session.getToken();
+      
+      const response = await fetch('http://localhost:5001/api/surveys/assignments', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          templateId: selectedTemplateId,
+          teamMemberId: selectedMember.id
+        })
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to generate survey link');
+      }
+      
+      const data = await response.json();
+      setSurveyLink(data.surveyUrl);
+    } catch (err) {
+      setSurveyLinkError(err.message);
+    } finally {
+      setSurveyLinkLoading(false);
+    }
+  };
+  
+  // Copy survey link to clipboard
+  const handleCopySurveyLink = () => {
+    navigator.clipboard.writeText(surveyLink)
+      .then(() => {
+        alert('Survey link copied to clipboard!');
+      })
+      .catch(err => {
+        console.error('Failed to copy link:', err);
+      });
+  };
+  
+  // Open survey link popup
+  const handleOpenSurveyLinkPopup = (member) => {
+    setSelectedMember(member);
+    setSurveyLink('');
+    setSurveyLinkError(null);
+    setShowSurveyLinkPopup(true);
+  };
+  
+  // Close survey link popup
+  const handleCloseSurveyLinkPopup = () => {
+    setShowSurveyLinkPopup(false);
+    setSelectedMember(null);
+    setSurveyLink('');
+  };
+
   useEffect(() => {
     fetchTeamMembers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -216,6 +319,7 @@ function TeamManagementPage() {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Role</th>
+                  <th>Survey Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -233,17 +337,26 @@ function TeamManagementPage() {
                        member.role}
                     </td>
                     <td>
+                      {member.survey_status === 'submitted' ? (
+                        <span className="status-completed">Completed</span>
+                      ) : member.survey_status === 'link_generated' ? (
+                        <span className="status-pending">Link Generated</span>
+                      ) : (
+                        <span className="status-unfilled">Not Started</span>
+                      )}
+                    </td>
+                    <td>
                       <button 
-                        className="delete-icon" 
-                        onClick={() => handleDeleteMember(member.id)}
-                        aria-label="Remove member"
+                        className="action-button generate-survey"
+                        onClick={() => handleOpenSurveyLinkPopup(member)}
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#FF5252" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="3 6 5 6 21 6"></polyline>
-                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                          <line x1="10" y1="11" x2="10" y2="17"></line>
-                          <line x1="14" y1="11" x2="14" y2="17"></line>
-                        </svg>
+                        Generate Survey Link
+                      </button>
+                      <button 
+                        className="action-button delete"
+                        onClick={() => handleDeleteMember(member.id)}
+                      >
+                        Delete
                       </button>
                     </td>
                   </tr>
@@ -259,6 +372,82 @@ function TeamManagementPage() {
           </>
         )}
       </div>
+
+      {/* Survey Link Popup */}
+      {showSurveyLinkPopup && (
+        <div className="popup-overlay" onClick={handleCloseSurveyLinkPopup}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Generate Survey Link</h2>
+            <p>Generate a survey link for {selectedMember?.name}</p>
+            
+            {!surveyLink ? (
+              <>
+                <div className="form-group">
+                  <label htmlFor="surveyTemplate">Select Survey Template:</label>
+                  <select 
+                    id="surveyTemplate" 
+                    value={selectedTemplateId}
+                    onChange={(e) => setSelectedTemplateId(e.target.value)}
+                  >
+                    {surveyTemplates.map(template => (
+                      <option key={template.id} value={template.id}>
+                        {template.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                
+                {surveyLinkError && <p className="error-message">{surveyLinkError}</p>}
+                
+                <div className="popup-actions">
+                  <button 
+                    className="action-button cancel"
+                    onClick={handleCloseSurveyLinkPopup}
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    className="action-button primary"
+                    onClick={handleGenerateSurveyLink}
+                    disabled={surveyLinkLoading || !selectedTemplateId}
+                  >
+                    {surveyLinkLoading ? 'Generating...' : 'Generate Link'}
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="survey-link-container">
+                  <input 
+                    type="text" 
+                    value={surveyLink} 
+                    readOnly 
+                    className="survey-link-input"
+                  />
+                  <button 
+                    className="action-button copy"
+                    onClick={handleCopySurveyLink}
+                  >
+                    Copy Link
+                  </button>
+                </div>
+                <p className="survey-link-instructions">
+                  Copy this link and share it with {selectedMember?.name}. 
+                  The link will expire in 30 days.
+                </p>
+                <div className="popup-actions">
+                  <button 
+                    className="action-button primary"
+                    onClick={handleCloseSurveyLinkPopup}
+                  >
+                    Close
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

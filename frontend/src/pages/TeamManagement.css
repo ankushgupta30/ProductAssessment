@@ -435,4 +435,56 @@
   margin: 0 0 20px 0;
   padding: 0;
   text-align: left;
+}
+
+/* Survey status indicators */
+.status-completed {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #FF9800;
+  font-weight: bold;
+}
+
+.status-unfilled {
+  color: #9E9E9E;
+}
+
+/* Survey link generation */
+.generate-survey {
+  background-color: #2196F3;
+}
+
+.generate-survey:hover {
+  background-color: #0b7dda;
+}
+
+.survey-link-container {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.survey-link-input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.copy {
+  background-color: #4CAF50;
+  margin-left: 10px;
+}
+
+.copy:hover {
+  background-color: #45a049;
+}
+
+.survey-link-instructions {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
 } 
